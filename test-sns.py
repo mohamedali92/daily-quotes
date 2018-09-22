@@ -1,12 +1,60 @@
 import boto3
+import logging
+from botocore.exceptions import ClientError
+from random import randrange
+
+logging.basicConfig(level=logging.INFO)
+
+session = boto3.Session(profile_name="daily-quotes")
+
+clientSNS = session.client("sns")
+dynamodb = session.resource("dynamodb")
+table = dynamodb.Table("DailyQuotes")
+phoneNumber = ""
 
 
-session = boto3.Session(profile_name='sns-sms')
+def get_number_of_quotes(phoneNumberPrimaryId):
+    try:
+        numberOfQuotes = table.get_item(
+            Key={
+                "PhoneNumber": phoneNumberPrimaryId
+            },
+            ProjectionExpression="NumberOfQuotes"
+        )
+    except ClientError as e:
+        logging.error(e.response['Error']['Message'])
+    else:
+        numberOfQuotesStripped = int(numberOfQuotes['Item']['NumberOfQuotes'])
+        logging.info(numberOfQuotesStripped)
+        return numberOfQuotesStripped
 
-client = session.client("sns")
+
+def get_random_quote(phoneNumberPrimaryId, quoteNumber):
+    expressionString = "Quotes[%s]" % (quoteNumber)
+    logging.info(expressionString)
+    try:
+        randomQuote = table.get_item(
+            Key={
+                "PhoneNumber": phoneNumberPrimaryId
+            },
+            ProjectionExpression=expressionString
+        )
+    except ClientError as e:
+        logging.error(e.response['Error']['Message'])
+    else:
+        randomQuoteStripped = randomQuote['Item']['Quotes'][0]
+        logging.info(randomQuoteStripped)
+        return randomQuoteStripped
 
 
-client.publish(
-    PhoneNumber="+17785524618",
-    Message="Hello World!!"
-)
+def send_random_quote_sms(phoneNumber, randomQuote):
+    clientSNS.publish(
+        PhoneNumber=phoneNumber,
+        Message=randomQuote
+    )
+
+numberOfQuotes = get_number_of_quotes(phoneNumber)
+randomNumber = randrange(numberOfQuotes - 1)
+randomQuote = get_random_quote(phoneNumber, randomNumber)
+send_random_quote_sms(phoneNumber, randomQuote)
+
