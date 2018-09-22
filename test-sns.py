@@ -30,14 +30,14 @@ def get_number_of_quotes(phoneNumberPrimaryId):
 
 
 def get_random_quote(phoneNumberPrimaryId, quoteNumber):
-    expressionString = "Quotes[%s]" % (quoteNumber)
-    logging.info(expressionString)
+    projectionExpressionString = f"Quotes[{quoteNumber}]"
+    logging.info(projectionExpressionString)
     try:
         randomQuote = table.get_item(
             Key={
                 "PhoneNumber": phoneNumberPrimaryId
             },
-            ProjectionExpression=expressionString
+            ProjectionExpression=projectionExpressionString
         )
     except ClientError as e:
         logging.error(e.response['Error']['Message'])
