@@ -14,7 +14,6 @@ dynamodb = boto3.resource("dynamodb")
 
 # Temp code while I refactor to pull dynamically from ssm
 if "DYNAMODB_TABLE" and "PHONE_NUMBER" in os.environ:
-    table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
     tableName = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
     phoneNumber = os.environ['PHONE_NUMBER']
 else:
@@ -63,7 +62,7 @@ def send_random_quote_sms(phoneNumber, randomQuote):
 
 
 def send_daily_quote(event, context):
-    numberOfQuotes = get_number_of_quotes(phoneNumber)
+    numberOfQuotes = get_number_of_quotes(tableName, phoneNumber)
     randomNumber = randrange(numberOfQuotes - 1)
-    randomQuote = get_random_quote(phoneNumber, randomNumber)
+    randomQuote = get_random_quote(tableName, phoneNumber, randomNumber)
     send_random_quote_sms(phoneNumber, randomQuote)
