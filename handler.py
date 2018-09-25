@@ -10,14 +10,20 @@ logger.setLevel(logging.INFO)
 
 clientSNS = boto3.client("sns")
 dynamodb = boto3.resource("dynamodb")
-table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
-phoneNumber = os.environ['PHONE_NUMBER']
-#phoneNumber = "+17785524618"
 
 
-def get_number_of_quotes(phoneNumberPrimaryId):
+# Temp code while I refactor to pull dynamically from ssm
+if "DYNAMODB_TABLE" and "PHONE_NUMBER" in os.environ:
+    table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
+    tableName = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
+    phoneNumber = os.environ['PHONE_NUMBER']
+else:
+    pass
+
+
+def get_number_of_quotes(tableName, phoneNumberPrimaryId):
     try:
-        numberOfQuotes = table.get_item(
+        numberOfQuotes = tableName.get_item(
             Key={
                 "PhoneNumber": phoneNumberPrimaryId
             },
@@ -31,11 +37,11 @@ def get_number_of_quotes(phoneNumberPrimaryId):
         return numberOfQuotesStripped
 
 
-def get_random_quote(phoneNumberPrimaryId, quoteNumber):
+def get_random_quote(tableName, phoneNumberPrimaryId, quoteNumber):
     projectionExpressionString = f"Quotes[{quoteNumber}]"
     logging.info(projectionExpressionString)
     try:
-        randomQuote = table.get_item(
+        randomQuote = tableName.get_item(
             Key={
                 "PhoneNumber": phoneNumberPrimaryId
             },
