@@ -9,7 +9,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "test-requirements.txt" }}
+          - v1-dependencies-{{ checksum "tests/test-requirements.txt" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
@@ -23,7 +23,7 @@ jobs:
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ checksum "test-requirements.txt" }}
+          key: v1-dependencies-{{ checksum "tests/test-requirements.txt" }}
       
       - run:
           name: run tests
