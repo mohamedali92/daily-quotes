@@ -32,6 +32,10 @@ package:
  exclude:
    - tests/**
    - .circlci/**
+   - Dockerfile
+   - requirements.txt
+   - README.md
+   - package-lock.json
 
 functions:
   daily-quote:
