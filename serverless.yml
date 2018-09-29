@@ -22,11 +22,8 @@ provider:
       Action:
         - sns:*
       Resource: "*"
-# you can add packaging information here
+
 package:
-#  include:
-#    - include-me.py
-#    - include-me-dir/**
  exclude:
    - tests/**
    - .circlci/**
@@ -40,6 +37,7 @@ functions:
     handler: handler.send_daily_quote
     events:
      - schedule: rate(24 hours)
+     
 resources:
   Resources:
     DailyQuotesDynamoDbTable:
