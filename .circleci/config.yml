@@ -32,11 +32,43 @@ jobs:
           command: |
             . venv/bin/activate
             python -m pytest tests
+  deploy:
+    docker:
+      - image: circleci/node:8.10
 
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: Install Serverless CLI and dependencies
+          command: |
+            sudo npm i -g serverless
+            npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-
+        
+      - run:
+          name: Deploy application to dev
+          command: sls deploy --verbose --stage dev --region us-west-2
           
 workflows:
   version: 2
   test_deploy:
     jobs:
       - test
+      - deploy:
+          requires:
+            - test
 
