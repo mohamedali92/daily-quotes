@@ -3,6 +3,8 @@ jobs:
   test:
     docker:
       - image: circleci/python:3.6.1
+    environment:
+      AWS_DEFAULT_REGION=us-west-2
     working_directory: ~/repo
     steps:
       - checkout
