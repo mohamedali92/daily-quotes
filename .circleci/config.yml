@@ -75,6 +75,7 @@ jobs:
           command: |
             sudo npm i -g serverless
             npm install
+      - run:
           name: Invoke function recently deployed
           command: sls invoke --function daily-quote --stage dev --region us-west-2 --log 
 
