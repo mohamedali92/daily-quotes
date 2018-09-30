@@ -47,6 +47,10 @@ jobs:
             sudo npm i -g serverless
             npm install
 
+      - run:
+          name: check node_modules location
+          command: |
+            sudo npm root -g
       - save_cache:
           key: v1-dependencies-
           paths:
