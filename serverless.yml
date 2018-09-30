@@ -31,13 +31,14 @@ package:
    - requirements.txt
    - README.md
    - package-lock.json
+   - __init__.py
 
 functions:
   daily-quote:
     handler: handler.send_daily_quote
     events:
      - schedule: rate(24 hours)
-     
+
 resources:
   Resources:
     DailyQuotesDynamoDbTable:
