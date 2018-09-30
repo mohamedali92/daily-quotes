@@ -37,25 +37,11 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          key: dependencies
-
       - run:
           name: Install Serverless CLI and dependencies
           command: |
             sudo npm i -g serverless
 
-      - run:
-          name: check node_modules
-          command: |
-            sudo npm root -g
-            sudo npm -g list
-      - save_cache:
-          key: dependencies
-          paths:
-            - node_modules    
-        
       - run:
           name: Deploy application to dev
           command: sls deploy --verbose --stage dev --region us-west-2        
@@ -67,11 +53,13 @@ jobs:
 
     steps:
       - checkout
+
       - run:
           name: Install Serverless CLI and dependencies
           command: |
             sudo npm i -g serverless
             npm install
+            
       - run:
           name: Invoke function recently deployed
           command: sls invoke --function daily-quote --stage dev --region us-west-2 --log 
