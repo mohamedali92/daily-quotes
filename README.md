@@ -32,7 +32,7 @@ Add PhoneNumber secret to SSM.
 Originally I used environment variables to pass my phone number to the handler function, but that means putting my personal phone number on the internet when I add my code to git. Yikes! After reading this [article](https://serverless.com/blog/serverless-secrets-api-keys/)  about secrets management I switched over to the AWS Systems Manager Parameter Store to store secrets. Refer to the above article or this [AWS document](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html)  to add a parameter with the name ```PhoneNumber``` to the parameter store.
 
 ### Deployment
-Deploy using  ``` sls deploy --stage STAGENAME --region REGIONNAME ```
+Deploy using  ``` sls deploy -v --stage STAGENAME --region REGIONNAME ```
 This should create the cloudwatch event, lambda function, DynamoDB table and the required iam role and permissions.
 
 ### Seeding  data
@@ -48,4 +48,8 @@ After deployment you should have an empty DynamoDB table in ```REGIONNAME``` . I
   ]
 }
 ```
+
+### Testing
+To test that your function works you can invoke it from the aws cli or using the serverless framework as follows
+```sls invoke --function daily-quote --stage dev --region us-west-2 --log```
 ### Adding new quotes
