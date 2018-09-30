@@ -8,7 +8,7 @@ Simple service to send myself daily motivational quotes. Over the last year I ha
  - Understand and gain experience building serverless applications using [AWS lambda](https://aws.amazon.com/lambda/)
  - Gain experience writting integration & acceptance tests for serverless applications
  - Learn how to build a CI/CD pipeline using [CirleCI](https://circleci.com/)
- - Learn how to use AWS resources such as SNS, DynmaoDB and Cloudwatch
+ - Learn how to use AWS resources such as SNS, DynamoDB and Cloudwatch
  - Gain experience with the [serverless framework](https://github.com/serverless/serverless)
 
 ## What marks the project as done?
@@ -25,7 +25,7 @@ Simple service to send myself daily motivational quotes. Over the last year I ha
 ### Setup
  1. [Setup an AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
  2. [Install and configure the serverless framework](https://serverless.com/framework/docs/providers/aws/guide/quick-start/)
- 3. [Configurecredentials](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
+ 3. [Configure credentials](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
 
  ### Setup secrets
 Add PhoneNumber secret to SSM. 
