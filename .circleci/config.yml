@@ -25,7 +25,7 @@ jobs:
           command: |
             . venv/bin/activate
             python -m pytest tests
-            
+
   deploy:
     docker:
       - image: circleci/node:8.10
@@ -56,10 +56,10 @@ workflows:
   version: 2
   test_deploy:
     jobs:
-      # - test
-      - deploy
-      #     requires:
-      #       - test
-      # - test_post_deploy:
-      #     requires:
-      #       - deploy
+      - test
+      - deploy:
+          requires:
+            - test
+      - test_post_deploy:
+          requires:
+            - deploy
