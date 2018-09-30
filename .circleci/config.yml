@@ -44,13 +44,14 @@ jobs:
       - run:
           name: Install Serverless CLI and dependencies
           command: |
-            sudo npm i serverless
+            sudo npm i -g serverless
             npm install
 
       - run:
           name: check node_modules
           command: |
             sudo npm root -g
+            sudo npm -g list
       - save_cache:
           key: v1-dependencies-
           paths:
