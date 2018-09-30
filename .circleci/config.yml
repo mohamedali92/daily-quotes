@@ -39,7 +39,7 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
-          key: v1-dependencies-
+          key: dependencies
 
       - run:
           name: Install Serverless CLI and dependencies
@@ -53,9 +53,9 @@ jobs:
             sudo npm root -g
             sudo npm -g list
       - save_cache:
-          key: v1-dependencies-
+          key: dependencies
           paths:
-            - ./node_modules    
+            - node_modules    
         
       - run:
           name: Deploy application to dev
