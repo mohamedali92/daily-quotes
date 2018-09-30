@@ -19,5 +19,5 @@ Simple service to send myself daily motivational quotes. Over the last year I ha
  - [ ] Command line application to add new quotes
 
 ## Architecture 
-
+![Architecture for daily-quotes project](https://cloudcraft.co/api/blueprint/4504a8e5-49f8-416c-9c99-4a0f98ec71d5/png?grid=true&transparent=false&width=1792&height=1063)
 ## Usage instructions
