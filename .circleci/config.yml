@@ -95,6 +95,6 @@ workflows:
       - deploy:
           requires:
             - test
-      - test_post_deploy;
+      - test_post_deploy:
           requires:
             - deploy
