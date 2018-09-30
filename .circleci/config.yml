@@ -10,10 +10,7 @@ jobs:
       - checkout
       # Download and cache dependencies
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "tests/test-requirements.txt" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          key: deps1-{{ .Branch }}-{{ checksum "tests/test-requirements.txt" }}
 
       - run:
           name: install dependencies
@@ -23,10 +20,9 @@ jobs:
             pip install -r tests/test-requirements.txt
 
       - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum  "tests/test-requirements.txt" }}
           paths:
-            - "venv"
-          key: v1-dependencies-{{ checksum "tests/test-requirements.txt" }}
-      
+            - "venv"      
       - run:
           name: run tests
           command: |
