@@ -70,22 +70,13 @@ jobs:
 
     steps:
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
       - run:
           name: Install Serverless CLI and dependencies
           command: |
             sudo npm i -g serverless
             npm install
           name: Invoke function recently deployed
-          command: |
-            sls invoke --function daily-quote --stage deve --region us-west-2 --log 
+          command: sls invoke --function daily-quote --stage deve --region us-west-2 --log 
 
 workflows:
   version: 2
