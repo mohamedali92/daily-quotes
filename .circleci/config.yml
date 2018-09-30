@@ -8,7 +8,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      # Download and cache dependencies
+
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "tests/test-requirements.txt" }}
 
@@ -39,10 +39,7 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
-          keys:
-          - v1-dependencies-
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          key: v1-dependencies-
 
       - run:
           name: Install Serverless CLI and dependencies
@@ -51,9 +48,9 @@ jobs:
             npm install
 
       - save_cache:
-          paths:
-            - node_modules
           key: v1-dependencies-
+          paths:
+            - ./node_modules    
         
       - run:
           name: Deploy application to dev
@@ -79,8 +76,8 @@ workflows:
   version: 2
   test_deploy:
     jobs:
-      - test
-      # - deploy:
+      # - test
+      - deploy
       #     requires:
       #       - test
       # - test_post_deploy:
