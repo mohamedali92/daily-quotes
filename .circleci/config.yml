@@ -24,7 +24,7 @@ jobs:
 
       - save_cache:
           paths:
-            - ./venv
+            - "venv"
           key: v1-dependencies-{{ checksum "tests/test-requirements.txt" }}
       
       - run:
@@ -61,7 +61,7 @@ jobs:
         
       - run:
           name: Deploy application to dev
-          command: sls deploy --verbose --stage dev --region us-west-2
+          command: sls deploy --verbose --stage dev --region us-west-2        
   test_post_deploy:
     docker:
       - image: circleci/node:8.10
@@ -84,9 +84,9 @@ workflows:
   test_deploy:
     jobs:
       - test
-      - deploy:
-          requires:
-            - test
-      - test_post_deploy:
-          requires:
-            - deploy
+      # - deploy:
+      #     requires:
+      #       - test
+      # - test_post_deploy:
+      #     requires:
+      #       - deploy
