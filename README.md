@@ -50,6 +50,6 @@ After deployment you should have an empty DynamoDB table in ```REGIONNAME``` . I
 ```
 
 ### Testing
-To test that your function works you can invoke it from the aws cli or using the serverless framework as follows
+To test that your function works you can invoke it from the aws console/cli or using the serverless framework as follows
 ```sls invoke --function daily-quote --stage dev --region us-west-2 --log```
 ### Adding new quotes
