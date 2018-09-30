@@ -51,10 +51,11 @@ jobs:
           name: check node_modules location
           command: |
             sudo npm root -g
+            
       - save_cache:
           key: v1-dependencies-
           paths:
-            - ./node_modules    
+            - /usr/local/lib/node_modules   
         
       - run:
           name: Deploy application to dev
