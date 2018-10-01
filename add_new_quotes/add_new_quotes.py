@@ -8,6 +8,7 @@ logger.setLevel(logging.INFO)
 clientSSM = boto3.client('ssm')
 dynamodb = boto3.resource("dynamodb")
 
+
 def get_secret(key):
     resp = clientSSM.get_parameter(
         Name=key,
@@ -16,8 +17,8 @@ def get_secret(key):
     return resp['Parameter']['Value']
 
 
-phoneNumber = get_secret('PhoneNumber')
 tableName = dynamodb.Table(get_secret('DYNAMODB_TABLE'))
+
 
 @click.command()
 @click.argument('phone_number')
@@ -27,20 +28,19 @@ def add_new_quote(phone_number, quote):
     click.echo('Hello World!')
     click.echo(phone_number)
     click.echo(quote)
-
-
-@click.command()
-@click.argument('phone_number')
-def get_number_of_quotes(phone_number):
     try:
-        numberOfQuotes = tableName.get_item(
+        response = tableName.update_item(
             Key={
                 "PhoneNumber": phone_number
             },
-            ProjectionExpression="NumberOfQuotes"
+            UpdateExpression="SET Quotes = list_append(Quotes, :i), NumberOfQuotes = NumberOfQuotes + :n",
+            ExpressionAttributeValues={
+                ':i': [quote],
+                ':n': 1,
+            },
+            ReturnValues="UPDATED_NEW"
         )
     except ClientError as e:
         logging.error(e.response['Error']['Message'])
-    else:
-        numberOfQuotesStripped = int(numberOfQuotes['Item']['NumberOfQuotes'])
-        click.echo(numberOfQuotesStripped)
+    else: 
+        click.echo(response)
