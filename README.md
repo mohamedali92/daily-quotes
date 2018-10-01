@@ -53,3 +53,7 @@ After deployment you should have an empty DynamoDB table in ```REGIONNAME``` . I
 To test that your function works you can invoke it from the aws console/cli or using the serverless framework as follows
 ```sls invoke --function daily-quote --stage dev --region us-west-2 --log```
 ### Adding new quotes
+To add a new quote, create a new virtualenv. Activate your virtualenv and cd into the add_new_quotes directory. Then run ```pip install --editable .```
+Make sure you have aws credentials setup with enough permissions to udpate items in dynamoDB table. You also need to set your table name in parameter store.
+After that you should be to add quotes; the ```PHONENUMBER``` is the primary key Id for the dynamoDB table. 
+```add_new_quote PHONENUMBER "QUOTE"```
