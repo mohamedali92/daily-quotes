@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/mohamedali92/daily-quotes/tree/master.svg?style=svg)](https://circleci.com/gh/mohamedali92/daily-quotes/tree/master)
 # Daily-quotes  
 
 Simple service to send myself daily motivational quotes. Over the last year I have collected quotes that I enjoy and can relate to. The purpose of this project is to deliver these one of these quotes daily to myself in the form of an sms message.
