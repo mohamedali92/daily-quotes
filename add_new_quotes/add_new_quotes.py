@@ -24,10 +24,6 @@ tableName = dynamodb.Table(get_secret('DYNAMODB_TABLE'))
 @click.argument('phone_number')
 @click.argument('quote')
 def add_new_quote(phone_number, quote):
-    """Example script."""
-    click.echo('Hello World!')
-    click.echo(phone_number)
-    click.echo(quote)
     try:
         response = tableName.update_item(
             Key={
