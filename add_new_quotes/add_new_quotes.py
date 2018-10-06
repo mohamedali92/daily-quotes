@@ -33,7 +33,7 @@ def process_quotes(quotes):
 @click.command()
 @click.argument('phone_number')
 @click.argument('quotes', nargs=-1)
-def add_new_quote(phone_number, quotes):
+def add_new_quotes(phone_number, quotes):
     new_quotes, number_of_new_quotes = process_quotes(quotes)
     if number_of_new_quotes > 0:
         try:

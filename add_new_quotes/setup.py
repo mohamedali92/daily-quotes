@@ -10,6 +10,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        add_new_quote=add_new_quotes:add_new_quote
+        add_new_quotes=add_new_quotes:add_new_quotes
     ''',
 )
