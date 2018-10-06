@@ -58,5 +58,6 @@ To add a new quote, create a new virtualenv. Activate your virtualenv and cd int
 Make sure you have aws credentials setup with enough permissions to udpate items in dynamoDB table. You also need to set your table name in parameter store.
 After that you should be able to add quotes; the ```PHONENUMBER``` is the primary key Id for the dynamoDB table. 
 ```add_new_quotes PHONENUMBER [QUOTES]...```
-Example:
+
+For Example:
 ```add_new_quotes +17781112222 "Like attracts like" "You attract what you are."```
