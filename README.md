@@ -17,7 +17,7 @@ Simple service to send myself daily motivational quotes. Over the last year I ha
  - [x] Integration and acceptance tests
  - [x] CI/CD pipeline for testing and deploying
  - [x] Secret management via AWS ssm
- - [ ] Command line application to add new quotes
+ - [x] Command line application to add new quotes
 
 ## Architecture 
 ![daily-quotes-arch](https://user-images.githubusercontent.com/8728962/46260974-f42a6d00-c4a1-11e8-9ae9-7072fcccf6fb.png)
