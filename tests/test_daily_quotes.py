@@ -22,7 +22,6 @@ table = dynamodb.Table(get_secret('DYNAMODB_TABLE'))
 
 
 def test_number_of_quotes():
-    print(sys.path)
     numberOfQuotes = get_number_of_quotes(table, phoneNumber)
     assert numberOfQuotes > 0
 
