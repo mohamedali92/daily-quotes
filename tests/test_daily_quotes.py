@@ -1,4 +1,3 @@
-# Path hack.
 import sys
 import os
 import boto3
